@@ -1,22 +1,23 @@
 package com.utad.rvwithmvvc.ui.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.utad.rvwithmvvc.R
 import com.utad.rvwithmvvc.data.modelMovie.Movie
 import com.utad.rvwithmvvc.data.modelMovie.MovieAdapter
 import com.utad.rvwithmvvc.databinding.ActivityMainBinding
 import com.utad.rvwithmvvc.ui.viewmodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -41,6 +42,14 @@ class MainActivity : AppCompatActivity() {
 
         observer()
 
+        binding.btnSiguiente.setOnClickListener{
+            movieViewModel.nextPage()
+        }
+
+        binding.btnAtras.setOnClickListener{
+            movieViewModel.previousPage()
+        }
+
         binding.toolbar.setOnMenuItemClickListener{ menuItem ->
             when (menuItem.itemId) {
                 R.id.bookmarkView ->{
@@ -48,22 +57,47 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
+
+                R.id.favoriteView -> {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        movieViewModel.modifyMovieDisplays()
+                    }
+                    true
+                }
+                R.id.nowPlaingView -> {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        movieViewModel.modifyMovieDisplays()
+                    }
+                    true
+                }
+
                 else -> false
             }
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun observer() {
         movieViewModel.movieModel.observe(this) {movieNewList ->
             movieAdapter.submitList(movieNewList)
          }
+
+        movieViewModel.pageModel.observe(this){
+            binding.tvNumberOfPage.text=it.toString()
+        }
+
     }
 
     private fun innitRv() {
         binding.rvMovie.layoutManager = GridLayoutManager(this, 2) // 2 es el número de columnas
-        movieAdapter = MovieAdapter(emptyList(), onClickListener = { movieViewModel.bookmarkMovie(it)})
+        movieAdapter = MovieAdapter(emptyList(), onClickListener = { movieViewModel.bookmarkMovie(it)}, bookMarkMovie = { goToDetails(it)})
         binding.rvMovie.adapter = movieAdapter
      }
 
 
+    private fun goToDetails(movie: Movie) {
+        val intent = Intent(this, MovieDetailActivity::class.java)
+        intent.putExtra("movie", movie)
+        startActivity(intent)
+    }
 }

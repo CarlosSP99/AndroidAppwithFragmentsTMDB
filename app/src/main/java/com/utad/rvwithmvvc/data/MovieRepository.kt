@@ -1,19 +1,15 @@
 package com.utad.rvwithmvvc.data
 
 import android.util.Log
-import androidx.paging.PagingData
+import androidx.lifecycle.LiveData
 import com.utad.rvwithmvvc.data.bookmark.MovieBookmarked
 import com.utad.rvwithmvvc.data.dao.MovieBookmarkDao
 import com.utad.rvwithmvvc.data.dao.MovieDao
-import com.utad.rvwithmvvc.data.model.MovieModel
-import com.utad.rvwithmvvc.data.model.PageModel
 import com.utad.rvwithmvvc.data.modelMovie.Movie
 import com.utad.rvwithmvvc.data.modelMovie.toDomainModel
 import com.utad.rvwithmvvc.data.network.MovieService
 import com.utad.rvwithmvvc.data.room.MovieEntity
 import com.utad.rvwithmvvc.data.room.toDomainBookmark
-import com.utad.rvwithmvvc.data.room.toDomainModel
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class MovieRepository @Inject constructor(
@@ -21,14 +17,22 @@ class MovieRepository @Inject constructor(
     private val movieBookmarkDao: MovieBookmarkDao,
     private val movieDao: MovieDao){
 
-    suspend fun getAllMovieFromApi(): List<Movie>{
-        val listPage = movieService.getMovies()
-       return listPage.results.map {
+    suspend fun get20MoviesFromApi(page: Int): List<Movie>{
+        val listPage = movieService.get20Movies(page)
+           return listPage.results.map {
                it.toDomainModel()
         }
 
     }
 
+    suspend fun getNewestMovies(page: Int): List <Movie>{
+        val listMovies = movieService.getNewestMovies(page)
+        return listMovies.results.map {
+            it.toDomainModel()
+        }
+    }
+
+    // room
     suspend fun insertMovie(movieEntity: MovieEntity){
        return movieDao.insertMovie(movieEntity)
     }

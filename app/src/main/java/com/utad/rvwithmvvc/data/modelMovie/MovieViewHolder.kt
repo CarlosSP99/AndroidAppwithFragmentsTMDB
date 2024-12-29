@@ -23,7 +23,7 @@ class MovieViewHolder(view: View): RecyclerView.ViewHolder(view){
     private lateinit var movie: Movie
 
     @SuppressLint("DefaultLocale")
-    fun render(item: Movie, onClickListener:(Movie) -> Unit) {
+    fun render(item: Movie, bookMarkMovie:(Movie) -> Unit, onClickLister:(Movie) -> Unit) {
         movie = item
         Glide
             .with(binding.ivPoster.context)
@@ -33,7 +33,7 @@ class MovieViewHolder(view: View): RecyclerView.ViewHolder(view){
 
         // indicamos la función y si clickamos en el que cambie
         binding.ivBookmark.setOnClickListener{
-            onClickListener(item)
+            bookMarkMovie(item)
             movie.bookmarket=!movie.bookmarket
             if(movie.bookmarket){
                 binding.ivBookmark.setImageResource(R.drawable.iv_bookmark)
@@ -41,6 +41,11 @@ class MovieViewHolder(view: View): RecyclerView.ViewHolder(view){
                 binding.ivBookmark.setImageResource(R.drawable.iv_bookempty)
             }
         }
+
+        binding.ivPoster.setOnClickListener{
+            onClickLister(item)
+        }
+
         if(movie.bookmarket){
             binding.ivBookmark.setImageResource(R.drawable.iv_bookmark)
         } else {

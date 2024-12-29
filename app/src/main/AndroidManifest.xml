@@ -17,7 +17,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.view.MovieDetailsActivity"
+            android:name=".ui.view.MovieDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.MovieActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.TopRatedMoviesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.MovieBookMarkedDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.view.MovieDetails"

@@ -8,6 +8,7 @@ import com.utad.rvwithmvvc.R
 
 class MovieAdapter(private var list: List<Movie>,
                    private  val onClickListener:(Movie) -> Unit,
+                    private val bookMarkMovie:(Movie) -> Unit
 ): RecyclerView.Adapter<MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -18,7 +19,7 @@ class MovieAdapter(private var list: List<Movie>,
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val item = list[position]
-        holder.render(item, onClickListener)
+        holder.render(item, onClickListener, bookMarkMovie)
     }
 
     override fun getItemCount(): Int {
