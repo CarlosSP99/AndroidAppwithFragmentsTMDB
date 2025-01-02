@@ -105,6 +105,7 @@ class MovieViewModel @Inject constructor(
     suspend fun modifyMovieDisplays() {
         numero=1
         var result = emptyList<Movie>()
+
         _pageModel.postValue(numero)
             when(whatIsGettingRequest){
             WhatIsgettingRequest.NOW_PLAYING -> {
