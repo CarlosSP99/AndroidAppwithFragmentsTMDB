@@ -1,0 +1,69 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2C3E50"
+    tools:context=".ui.view.MovieDetailActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menutoolbar"
+        app:navigationIcon="@drawable/ic_back"
+        app:title="Flaming"
+        app:titleTextColor="@color/white" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+
+        android:id="@+id/iv_poster"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="italic"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        app:layout_constraintEnd_toEndOf="@+id/iv_poster"
+        app:layout_constraintStart_toStartOf="@+id/iv_poster"
+        app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
+
+    <TextView
+        android:id="@+id/tv_Date"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_Descripcion"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="8dp"
+        android:lineSpacingExtra="2dp"
+        android:text="descripcion"
+        app:layout_constraintEnd_toEndOf="@+id/tv_Date"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/tv_Date"
+        app:layout_constraintTop_toBottomOf="@+id/tv_Date" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
