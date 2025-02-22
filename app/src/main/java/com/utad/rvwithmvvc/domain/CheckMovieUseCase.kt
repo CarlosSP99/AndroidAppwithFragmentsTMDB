@@ -7,7 +7,7 @@ import com.utad.rvwithmvvc.data.modelMovie.toDomainEntity
 import com.utad.rvwithmvvc.data.room.MovieEntity
 import javax.inject.Inject
 
-class CheckMovieUseCase@Inject constructor(private val repository: MovieRepository) {
+    class CheckMovieUseCase@Inject constructor(private val repository: MovieRepository) {
     suspend operator fun invoke(movie: Movie):Boolean{
         val result = repository.checkMovie(movie.toDomainEntity())
         if (result){

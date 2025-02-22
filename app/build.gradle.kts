@@ -48,6 +48,9 @@ dependencies {
     // glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
+    //retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
     // okhttp
     implementation(libs.logging.interceptor)
 
@@ -60,9 +63,7 @@ dependencies {
     //framgents
     implementation(libs.androidx.fragment)
 
-    //retrofit
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
+
 
     // DaggerHilt
     implementation (libs.hilt.android)

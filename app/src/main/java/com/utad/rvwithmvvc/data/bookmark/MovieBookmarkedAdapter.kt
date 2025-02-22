@@ -8,7 +8,8 @@ import com.utad.rvwithmvvc.R
 import com.utad.rvwithmvvc.data.modelMovie.Movie
 import com.utad.rvwithmvvc.data.modelMovie.MovieViewHolder
 
-class MovieBookmarkedAdapter(private var list: List<MovieBookmarked>,
+class MovieBookmarkedAdapter(
+    private var list: List<MovieBookmarked>,
     private  val onClickListener:(MovieBookmarked) -> Unit,
 ): RecyclerView.Adapter<MovieBookmarkedViewHolder>() {
 

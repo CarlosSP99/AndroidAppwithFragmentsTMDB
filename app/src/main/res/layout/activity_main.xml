@@ -9,6 +9,7 @@
     tools:context=".ui.view.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
+        app:popupTheme="@color/black"
         android:backgroundTint="@color/tool_bar"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"

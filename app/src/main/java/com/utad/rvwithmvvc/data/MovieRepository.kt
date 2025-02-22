@@ -13,7 +13,7 @@ import com.utad.rvwithmvvc.data.room.toDomainBookmark
 import javax.inject.Inject
 
 class MovieRepository @Inject constructor(
-    private val movieService: MovieService,
+        private val movieService: MovieService,
     private val movieBookmarkDao: MovieBookmarkDao,
     private val movieDao: MovieDao){
 
@@ -53,7 +53,6 @@ class MovieRepository @Inject constructor(
     suspend fun getBookMarkMovies():List<MovieBookmarked>{
         val result = movieBookmarkDao.getAllMoviesBookmarked()
         return result.map{
-            Log.i("tagxD"," ${it.title} ")
             it.toDomainBookmark()
          }
     }
